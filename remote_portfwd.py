@@ -93,7 +93,7 @@ This code should be running on the remote (attacked) machine.
 A tunnel will be created to the thost:tport address using a reverse 
 connection logic, to bypass firewall. The data coming from the tunnel
 will then be sent over a new connection to the forward address.
-Usally the tunnel should be your RPPF local tunnel address.
+The tunnel address should be your RPPF local tunnel address.
 Example : ./remote_portfwd.py localhost:4444 google.com:80
 --------------------------------------
 * Only tcp protocol supported *
