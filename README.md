@@ -1,4 +1,4 @@
-# ReverseProxyPortForwarder
+# reverse-proxy-port-forwarder
 
 *linux and windows binaries available*
 
