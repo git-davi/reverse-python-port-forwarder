@@ -4,22 +4,23 @@
 
 ## Summary
 
-This tool comes with 2 programs that must cooperate :
+This tool comes with 2 pieces :
 - **local_portfwd**
 - **remote_portfwd**
 
-These programs are creating a tunnel for tcp packets between a local and a remote machine so they have to run **simultaneosly**.  
-The ***local port forward*** program should be running on your local machine, after being started
-it will be listening for the incoming tunnel connection handshake and will open a service port.  
-I've choosen a reverse connection logic (remote -> local) instead of a simple bind beacause
-it's better to escape firewall rules.  
-Once the connection is established you are ready to forward packets to the remote machine 
-by simply sending requests to the RPPF service address (ex. localhost:4444).  
-Then the requests will be tunneled to the endpoint of the tunnel which is the ***remote port forward*** program. At last, this script is a simple proxy and it will act on behalf of you, forwarding packets to the target address (that you must specifiy during startup).  
-Look at bottom page for a simple example.
+These programs are creating a tunnel for tcp packets between a local and a remote machine so they have to run *simultaneosly*.  
+The ***local port forward*** program should be running on your local machine, after being started it will be listening for the incoming tunnel connection handshake and on success it will open a service port.  
+  
+- **I've choosen a reverse connection logic (remote-attacked connecting to local-attacker) instead of a simple bind beacause it's better at escaping firewall rules.**  
+  
+Once the connection is established you are ready to forward packets to the remote machine by simply sending requests to the RPPF service address (ex. `localhost:4444`).  
+Then the requests will be forwarded to the endpoint of the tunnel which is the ***remote port forward*** program.  
+The remote forward script is a simple proxy and it will act on behalf of you, forwarding packets to the target address (which you must specifiy during startup).  
+Look at bottom page for a simple example.  
 
 ## Help menu
 
+`remote_portfwd.py` helper menu :
 ```shell
 $ ./remote_portfwd.py -h
 usage: remote_portfwd.py [-h] thost:tport fhost:fport
@@ -51,7 +52,8 @@ positional arguments:
 optional arguments:
   -h, --help   show this help message and exit
 ```
-
+  
+`local_portfwd.py` helper menu :
 ```shell
  $ ./local_portfwd.py -h
 usage: local_portfwd.py [-h] thost:tport rhost:rport
