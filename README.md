@@ -8,7 +8,7 @@ This tool comes with two pieces that have to run *simultaneosly* on different ma
 - **local_portfwd**
 - **remote_portfwd**
   
-The concept is simple.
+The concept is simple.  
 These programs are creating a tunnel for tcp packets between two machine.    
 The ***local port forward*** program should be running on your local machine, after being started it will be listening for the incoming tunnel connection handshake and on success it will open a service port.  
   
