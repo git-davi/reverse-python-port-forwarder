@@ -4,11 +4,12 @@
 
 ## Summary
 
-This tool comes with 2 pieces :
+This tool comes with two pieces that have to run *simultaneosly* on different machines :
 - **local_portfwd**
 - **remote_portfwd**
-
-These programs are creating a tunnel for tcp packets between a local and a remote machine so they have to run *simultaneosly*.  
+  
+The concept is simple.
+These programs are creating a tunnel for tcp packets between two machine.    
 The ***local port forward*** program should be running on your local machine, after being started it will be listening for the incoming tunnel connection handshake and on success it will open a service port.  
   
 - **I've choosen a reverse connection logic (remote-attacked connecting to local-attacker) instead of a simple bind beacause it's better at escaping firewall rules.**  
