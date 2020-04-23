@@ -8,7 +8,7 @@ This tool comes with 2 programs that must cooperate :
 - **local_portfwd**
 - **remote_portfwd**
 
-These must be running on remote and local machine and are creating a tunnel for tcp packets.  
+These programs are creating a tunnel for tcp packets between a local and a remote machine so they have to run **simultaneosly**.  
 The ***local port forward*** program should be running on your local machine, after being started
 it will be listening for the incoming tunnel connection handshake and will open a service port.  
 I've choosen a reverse connection logic (remote -> local) instead of a simple bind beacause
@@ -109,7 +109,7 @@ RPPF Service opened on ('localhost', 4242)
 Ready to transfer data
 
 ```
-Now the RPPF forward service is **ready and listening** on port 4242.
+Now the RPPF forward service is **ready and listening** on port 4242.  
 `10.10.14.19` is the IP to bind to, can be also `0.0.0.0` to listen on every interface.
   
 If you go back to remote console the output should have been updated :
@@ -126,4 +126,5 @@ Ready to transfer data
 This means that the also the remote service is **ready and running**.  
   
 Now you can just type `localhost:4242` in your web browser to connect to the site as a localhost. :smile:  
+  
 ***NOTE** : For an http request you may need to modify the HOST header (just intercept the request before being sent to layer 4).*
