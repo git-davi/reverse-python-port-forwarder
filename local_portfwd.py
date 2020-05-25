@@ -64,16 +64,16 @@ parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter, 
         description=
         u'''
--------------------------------------
- Reverse Proxy Port Forwarder (Local)
--------------------------------------
-Welcome to the RPPF, a simple port forwarder written in python.
+---------------------------------------
+ Python Reverse Port Forwarder (Local)
+---------------------------------------
+Welcome to the PRPF, a simple port forwarder written in python.
 This code should be running on local (attacker) machine.
 The program will be listening for the incoming tunnel connection from
 remote_portfwd.py (thost:tport).
-After the connection is established the RPPF is ready to forward data. 
+After the connection is established the PRPF is ready to forward data. 
 Just send data to the service address.
--------------------------------------
+---------------------------------------
 * Only tcp protocol supported *
 
      __                          __
