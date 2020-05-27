@@ -14,7 +14,7 @@ The ***local port forward*** program should be running on your local machine, af
   
 - **I've choosen a reverse connection logic (remote-attacked connecting to local-attacker) instead of a simple bind beacause it's better at escaping firewall rules.**  
   
-Once the connection is established you are ready to forward packets to the remote machine by simply sending requests to the RPPF service address (ex. `localhost:4444`).  
+Once the connection is established you are ready to forward packets to the remote machine by simply sending requests to the PRPF service address (ex. `localhost:4444`).  
 Then the requests will be forwarded to the endpoint of the tunnel which is the ***remote port forward*** program.  
 The remote forward script is a simple proxy and it will act on behalf of you, forwarding packets to the target address (which you must specifiy during startup).  
 Look at bottom page for a simple example.  
