@@ -1,10 +1,10 @@
-# python-reverse-port-forwarder
+# reverse-python-port-forwarder
 
 *linux and windows binaries available*
 
 ## Summary
 
-This tool comes in two pieces that have to run *simultaneosly* on different machines :
+This tool comes in two pieces that should *simultaneosly* on different machines :
 - **local_portfwd**
 - **remote_portfwd**
   
@@ -14,7 +14,7 @@ The ***local port forward*** program should be running on your local machine, af
   
 - **I've choosen a reverse connection logic (remote-attacked connecting to local-attacker) instead of a simple bind beacause it's better at escaping firewall rules.**  
   
-Once the connection is established you are ready to forward packets to the remote machine by simply sending requests to the PRPF service address (ex. `localhost:4444`).  
+Once the connection is established you are ready to forward packets to the remote machine by simply sending requests to the RPPF service address (ex. `localhost:4444`).  
 Then the requests will be forwarded to the endpoint of the tunnel which is the ***remote port forward*** program.  
 The remote forward script is a simple proxy and it will act on behalf of you, forwarding packets to the target address (which you must specifiy during startup).  
 Look at bottom page for a simple example.  
@@ -27,14 +27,14 @@ $ ./remote_portfwd.py -h
 usage: remote_portfwd.py [-h] thost:tport fhost:fport
 
 ----------------------------------------
- Python Reverse Port Forwarder (Remote)
+ Reverse Python Port Forwarder (Remote)
 ----------------------------------------
-Welcome to the PRPF, a simple port forwarder written in python.
+Welcome to the RPPF, a simple port forwarder written in python.
 This code should be running on the remote (attacked) machine.
 A tunnel will be created to the thost:tport address using a reverse 
 connection logic, to bypass firewall. The data coming from the tunnel
 will then be sent over a new connection to the forward address.
-The tunnel address should be your PRPF local tunnel address.
+The tunnel address should be your RPPF local tunnel address.
 Example : ./remote_portfwd.py localhost:4444 google.com:80
 ----------------------------------------
 * Only tcp protocol supported *
@@ -60,13 +60,13 @@ optional arguments:
 usage: local_portfwd.py [-h] thost:tport rhost:rport
 
 ---------------------------------------
- Python Reverse Port Forwarder (Local)
+ Reverse Python Port Forwarder (Local)
 ---------------------------------------
-Welcome to the PRPF, a simple port forwarder written in python.
+Welcome to the RPPF, a simple port forwarder written in python.
 This code should be running on local (attacker) machine.
 The program will be listening for the incoming tunnel connection from
 remote_portfwd.py (thost:tport).
-After the connection is established the PRPF is ready to forward data. 
+After the connection is established the RPPF is ready to forward data. 
 Just send data to the service address.
 ---------------------------------------
 * Only tcp protocol supported *
